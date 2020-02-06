@@ -15,8 +15,6 @@ const rootReducer = combineReducers({
   user: userReducer
 });
 
-//console.log("inside store", allpostReducer);
-
 const store = createStore(rootReducer, composeWithDevTools());
 
 export default store;

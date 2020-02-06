@@ -9,7 +9,7 @@ class Header extends React.Component {
     return (
       <div className="header">
         <HeaderLeft />
-        {this.props.userID ? <HeaderRight userID={this.props.userID} /> : null}
+        {this.props.userID ? <HeaderRight /> : null}
       </div>
     );
   }

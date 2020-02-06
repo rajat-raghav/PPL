@@ -201,7 +201,7 @@ router.post("/postcount", function(req, res) {
 });
 
 router.post("/defaultCat", function(req, res) {
-  categorySchema.find({}, function(err, re) {
+  categorySchema.find({}).then(re => {
     if (re) {
       let addStatusInResult = {
         result: re,

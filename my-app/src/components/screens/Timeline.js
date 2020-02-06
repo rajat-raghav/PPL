@@ -127,11 +127,12 @@ class Timeline extends React.Component {
       .then(response => {
         //console.log("ressss-----------", response);
         //const c_status = response.data.status;
-        const categoriesData = response.data.result;
-        store.dispatch(categories(categoriesData));
+        //const categoriesData = response.data.result;
+        //store.dispatch(categories(categoriesData));
         //this.setState({ categories });
         //console.log("categories----", this.state.categories);
         store.dispatch(categoryUploadForm(!this.props.showCategoryForm));
+        this.defaultCategory();
         //alert(c_status);
         //this.setState({ newcategory: "" });
         // this.removevalue();

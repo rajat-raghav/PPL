@@ -1,5 +1,5 @@
 export const postUploadForm = showPopup => {
-  console.log("postforms action--", showPopup);
+  //console.log("postforms action--", showPopup);
   return {
     type: "postUploadForm",
     showPopup: showPopup
