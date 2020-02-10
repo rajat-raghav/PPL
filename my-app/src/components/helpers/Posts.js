@@ -23,7 +23,7 @@ const Posts = props => {
               {moment(data.time).format("MMM Do, YYYY")}
             </span>
             <span className="span_time">
-              {moment(data.time).format("h:mm:ss a")}
+              {moment(data.time).format("h:mm:ss A")}
             </span>
           </div>
         </div>
@@ -56,13 +56,8 @@ const Posts = props => {
                 </a>
               </li>
               <li>
-                {/* <Like
-                    postid={data._id}
-                    postLikes={data.likes}
-                  /> */}
                 <a
                   onClick={() => {
-                    //console.log("data id", data._id);
                     likepost(data._id);
                   }}
                 >
@@ -87,16 +82,6 @@ const Posts = props => {
     </div>
   );
 };
-
-// const mapStateToProps = state => {
-//   //console.log("map state to props POSTS", state);
-//   return {
-//     content: state.posts.content,
-//     items: state.posts.items,
-//     postsperpage: state.posts.postsperpage
-//     //commentsCount: state.comments.commentsCount
-//   };
-// };
 
 Posts.propTypes = {
   data: PropTypes.object,

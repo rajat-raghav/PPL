@@ -10,7 +10,9 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      records: ""
+      records: "",
+      hasError: false,
+      errorMsg: ""
     };
   }
   login = e => {
@@ -59,11 +61,11 @@ class Login extends React.Component {
         }
       })
       .catch(error => {
-        //console.log(error);
-        if (error.message === "Network Error") {
-          this.props.history.push("/ServerError");
-          //alert("something went wrong");
-        }
+        this.setState({
+          hasError: true,
+          errorMsg: error.message
+        });
+        //alert("something went wrong");
       });
   };
 
@@ -79,6 +81,16 @@ class Login extends React.Component {
   }
 
   render() {
+    if (this.state.hasError) {
+      return (
+        <div
+          style={{ padding: "16% 30%", color: "#f47b13", textAlign: "center" }}
+        >
+          <h1>Something went wrong.</h1>
+          <h2>Error:{this.state.errorMsg}</h2>
+        </div>
+      );
+    }
     return (
       <div className="container">
         <Helmet>

@@ -6,13 +6,15 @@ import commentsReducer from "./reducers/commentsReducer";
 import categoriesReducer from "./reducers/categoriesReducer";
 import formsReducer from "./reducers/formsReducer";
 import userReducer from "./reducers/userReducer";
+import errorReduser from "./reducers/errorReducer";
 
 const rootReducer = combineReducers({
   posts: allpostReducer,
   comments: commentsReducer,
   categories: categoriesReducer,
   forms: formsReducer,
-  user: userReducer
+  user: userReducer,
+  error: errorReduser
 });
 
 const store = createStore(rootReducer, composeWithDevTools());

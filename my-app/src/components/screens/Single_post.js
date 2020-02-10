@@ -7,6 +7,7 @@ import { ROUTES } from "../helpers/Config";
 import store from "../../redux/store";
 import { single_post, like_post } from "../../redux/actions/allpostActions";
 import { comments } from "../../redux/actions/commentsAction";
+import { error } from "../../redux/actions/errorAction";
 import ContentRight from "../helpers/ContentRight";
 import SinglePostContentLeft from "../singlepost/SinglePostContentLeft";
 import getData from "../helpers/getData";
@@ -29,11 +30,8 @@ class Single_post extends React.Component {
         this.previousComments(0);
         this.postData();
       })
-      .catch(error => {
-        //console.log("network error");
-        if (error.message === "Network Error") {
-          this.props.history.push("/ServerError");
-        }
+      .catch(err => {
+        store.dispatch(error(true, err.message));
       });
     event.target.comment.value = null;
     window.scrollTo(500, 500);
@@ -53,11 +51,8 @@ class Single_post extends React.Component {
         //this.setState({ singlePostData: response.data.result });
         store.dispatch(single_post(singlePostData));
       })
-      .catch(error => {
-        console.log("network error");
-        if (error.message === "Network Error") {
-          this.props.history.push("/ServerError");
-        }
+      .catch(err => {
+        store.dispatch(error(true, err.message));
       });
   };
 
@@ -69,18 +64,22 @@ class Single_post extends React.Component {
     };
     // axios
     //   .post(SERVER.SERVER_URL + SERVER.ROUTES.DEFAULT_COMMENT, data)
-    getData(ROUTES.DEFAULT_COMMENT, data).then(response => {
-      //console.log("Default Comment Response -----------", response.data);
-      //const commentstatus = response.data.status;
-      let commentsData = response.data.result;
-      //commentsData.reverse();
-      //let commentsCount = commentsData.length;
+    getData(ROUTES.DEFAULT_COMMENT, data)
+      .then(response => {
+        //console.log("Default Comment Response -----------", response.data);
+        //const commentstatus = response.data.status;
+        let commentsData = response.data.result;
+        //commentsData.reverse();
+        //let commentsCount = commentsData.length;
 
-      store.dispatch(comments(commentsData, commentsSkipCount));
+        store.dispatch(comments(commentsData, commentsSkipCount));
 
-      //this.setState({ commentstatus, commentsData, commentsCount });
-      //console.log("commentss----", this.state.commentsData);
-    });
+        //this.setState({ commentstatus, commentsData, commentsCount });
+        //console.log("commentss----", this.state.commentsData);
+      })
+      .catch(err => {
+        store.dispatch(error(true, err.message));
+      });
   };
 
   likepost = id => {
@@ -96,10 +95,8 @@ class Single_post extends React.Component {
         const contentcopy = response.data.result;
         store.dispatch(like_post(contentcopy));
       })
-      .catch(error => {
-        if (error.message === "Network Error") {
-          this.props.history.push("/ServerError");
-        }
+      .catch(err => {
+        store.dispatch(error(true, err.message));
       });
   };
 
@@ -109,6 +106,9 @@ class Single_post extends React.Component {
 
   componentDidMount() {
     //console.log("----------component Did mount-----------");
+    if (this.props.history.action === "POP") {
+      this.props.history.push("/Timeline");
+    }
     this.postData();
     this.previousComments(0);
     window.scrollTo(0, 0);
@@ -116,7 +116,16 @@ class Single_post extends React.Component {
 
   render() {
     const { singlePostData } = this.props;
-
+    if (this.props.hasError) {
+      return (
+        <div
+          style={{ padding: "16% 30%", color: "#f47b13", textAlign: "center" }}
+        >
+          <h1>Something went wrong.</h1>
+          <h2>Error:{this.props.errorMsg}</h2>
+        </div>
+      );
+    }
     return (
       <div className="container">
         <Helmet>
@@ -144,14 +153,18 @@ const mapStateToProps = state => {
   return {
     commentsData: state.comments.commentsData,
     commentsLimitCount: state.comments.commentsLimitCount,
-    singlePostData: state.posts.singlePostContent
+    singlePostData: state.posts.singlePostContent,
+    errorMsg: state.error.errorMsg,
+    hasError: state.error.hasError
   };
 };
 
 Single_post.propTypes = {
   commentsData: PropTypes.array,
   singlePostData: PropTypes.array,
-  commentsLimitCount: PropTypes.number
+  commentsLimitCount: PropTypes.number,
+  hasError: PropTypes.bool,
+  errorMsg: PropTypes.string
 };
 
 export default connect(mapStateToProps)(Single_post);

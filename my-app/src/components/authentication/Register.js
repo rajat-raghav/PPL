@@ -15,7 +15,9 @@ class Register extends React.Component {
       password: "",
       email: "",
       first_name: "",
-      last_name: ""
+      last_name: "",
+      hasError: false,
+      errorMsg: ""
     };
   }
   changestate = e => {
@@ -47,11 +49,11 @@ class Register extends React.Component {
         }
       })
       .catch(error => {
-        //console.log(error);
-        if (error.message === "Network Error") {
-          this.props.history.push("/ServerError");
-          //alert("something went wrong");
-        }
+        this.setState({
+          hasError: true,
+          errorMsg: error.message
+        });
+        //alert("something went wrong");
       });
   };
 
@@ -62,6 +64,16 @@ class Register extends React.Component {
   }
 
   render() {
+    if (this.state.hasError) {
+      return (
+        <div
+          style={{ padding: "16% 30%", color: "#f47b13", textAlign: "center" }}
+        >
+          <h1>Something went wrong.</h1>
+          <h2>Error:{this.state.errorMsg}</h2>
+        </div>
+      );
+    }
     return (
       <div>
         <div className="container">

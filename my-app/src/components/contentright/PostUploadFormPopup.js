@@ -49,7 +49,12 @@ const PostUploadFormPopup = props => {
               </select>
             </li>
             <li>
-              <input type="file" name="selectedFiles" required />
+              <input
+                type="file"
+                name="selectedFiles"
+                accept="image/x-png,image/gif,image/jpeg"
+                required
+              />
             </li>
             <br />
             <li>

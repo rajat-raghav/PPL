@@ -10,6 +10,7 @@ import Posts from "../helpers/Posts";
 
 const Pagination = props => {
   const { content, likepost, hasMoreItems, loadMore } = props;
+
   // const getPost = ({ index, style }) => {
   //   console.log("index", index);
   //   console.log("this.props.content", content);

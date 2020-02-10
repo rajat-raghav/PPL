@@ -26,7 +26,7 @@ class HeaderRight extends React.Component {
 
         <div className="pro_info pull-right">
           <div className="pro_icn">
-            <img src="images/pic_small.png" />
+            <img src="/images/pic_small.png" />
           </div>
           <div className="pro_txt">
             <b className="caret"></b>

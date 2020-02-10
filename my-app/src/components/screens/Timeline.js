@@ -10,6 +10,7 @@ import { ROUTES } from "../helpers/Config";
 import { all_post, like_post } from "../../redux/actions/allpostActions";
 import { categories } from "../../redux/actions/categoriesAction";
 import { loginUser } from "../../redux/actions/userActions";
+import { error } from "../../redux/actions/errorAction";
 import store from "../../redux/store";
 import {
   postUploadForm,
@@ -40,10 +41,7 @@ class Timeline extends React.Component {
         );
       })
       .catch(error => {
-        //console.log("network error");
-        if (error.message === "Network Error") {
-          this.props.history.push("/ServerError");
-        }
+        store.dispatch(error(true, error.message));
       });
   };
 
@@ -77,10 +75,8 @@ class Timeline extends React.Component {
           );
         }
       })
-      .catch(error => {
-        if (error.message === "Network Error") {
-          this.props.history.push("/ServerError");
-        }
+      .catch(err => {
+        store.dispatch(error(true, err.message));
       });
   };
 
@@ -97,17 +93,15 @@ class Timeline extends React.Component {
         const contentcopy = response.data.result;
         store.dispatch(like_post(contentcopy));
       })
-      .catch(error => {
-        if (error.message === "Network Error") {
-          this.props.history.push("/ServerError");
-        }
+      .catch(err => {
+        store.dispatch(error(true, err.message));
       });
   };
 
   static getDerivedStateFromError(error) {
     //return <h1>Something went wrong.</h1>;
     //alert("something went wrong");
-    console.log("something went wrong");
+    store.dispatch(error(true, "Error!!!!!!!!!!!!!"));
   }
   //-----Content Right Functions--------------------------------
 
@@ -137,12 +131,8 @@ class Timeline extends React.Component {
         //this.setState({ newcategory: "" });
         // this.removevalue();
       })
-      .catch(error => {
-        //console.log(error);
-        if (error.message === "Network Error") {
-          this.props.history.push("/ServerError");
-          //alert("something went wrong");
-        }
+      .catch(err => {
+        store.dispatch(error(true, err.message));
       });
   };
 
@@ -159,12 +149,8 @@ class Timeline extends React.Component {
         //console.log("categories----", this.state.categoryarr);
         //alert(c_status);
       })
-      .catch(error => {
-        //console.log(error);
-        if (error.message === "Network Error") {
-          this.props.history.push("/ServerError");
-          //alert("something went wrong");
-        }
+      .catch(err => {
+        store.dispatch(error(true, err.message));
       });
     //   this.setState({count:false})
   };
@@ -208,12 +194,8 @@ class Timeline extends React.Component {
         this.allPosts(0);
         //this.removevalue();
       })
-      .catch(error => {
-        //console.log(error);
-        if (error.message === "Network Error") {
-          this.props.history.push("/ServerError");
-          //alert("something went wrong");
-        }
+      .catch(err => {
+        store.dispatch(error(true, err.message));
       });
   };
 
@@ -235,6 +217,21 @@ class Timeline extends React.Component {
 
   render() {
     //console.log("<<---------------------render---------------------->>");
+    if (this.props.hasError) {
+      return (
+        <div
+          style={{
+            padding: "16% 30%",
+            color: "#f47b13",
+            textAlign: "center"
+            //backgroundImage: "url(" + "/images/Errorimg.jpg" + ")"
+          }}
+        >
+          <h1>Something went wrong.</h1>
+          <h2>Error:{this.props.errorMsg}</h2>
+        </div>
+      );
+    }
 
     return (
       <div className="container">
@@ -268,7 +265,9 @@ const mapStateToProps = state => {
     postsUserID: state.posts.postsUserID,
     hasMoreItems: state.posts.hasMoreItems,
     showCategoryForm: state.forms.showCategoryForm,
-    showPopup: state.forms.showPopup
+    showPopup: state.forms.showPopup,
+    hasError: state.error.hasError,
+    errorMsg: state.error.errorMsg
   };
 };
 
@@ -279,7 +278,8 @@ Timeline.propTypes = {
   postsUserID: PropTypes.string,
   hasMoreItems: PropTypes.bool,
   showCategoryForm: PropTypes.bool,
-  showPopup: PropTypes.bool
+  showPopup: PropTypes.bool,
+  hasError: PropTypes.bool
 };
 
 export default connect(mapStateToProps)(Timeline);

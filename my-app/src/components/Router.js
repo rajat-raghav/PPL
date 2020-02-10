@@ -5,7 +5,6 @@ import Login from "./authentication/Login";
 import Register from "./authentication/Register";
 import Timeline from "./screens/Timeline";
 import Single_post from "./screens/Single_post";
-import ServerError from "./ServerError";
 
 const Router = () => (
   <Switch>
@@ -13,7 +12,6 @@ const Router = () => (
     <Route path="/Login" component={Login} />
     <Route path="/Register" component={Register} />
     <Route path="/Timeline" component={Timeline} />
-    <Route path="/ServerError" component={ServerError} />
     <Route path="/Single_post/:id" component={Single_post} />
     <Route path="*" component={Login} />
   </Switch>

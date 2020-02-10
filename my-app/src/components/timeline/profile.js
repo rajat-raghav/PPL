@@ -20,7 +20,7 @@ const Profile = props => {
       <div className="timeline_div">
         <div className="timeline_div1">
           <div className="profile_pic">
-            <img src="images/timeline_profile.jpg" alt="" />
+            <img src="/images/timeline_profile.jpg" alt="" />
             <div className="profile_text">
               <a href="#">Change Profile Pic</a>
             </div>
@@ -28,7 +28,7 @@ const Profile = props => {
           <div className="profile_info">
             <div className="edit_div">
               <a href="#">
-                Edit <img src="images/timeline_img.png" alt="" />
+                Edit <img src="/images/timeline_img.png" alt="" />
               </a>
             </div>
             <div className="profile_form">
