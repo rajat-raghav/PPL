@@ -9,7 +9,6 @@ const initialState = {
 };
 
 const allpostReducer = (state = initialState, action) => {
-  //console.log(">typwe>>>>>>>", action.type, typeof action.type);
   switch (action.type) {
     case "single_post":
       return {
@@ -18,7 +17,6 @@ const allpostReducer = (state = initialState, action) => {
       };
 
     case "like_post":
-      //console.log("reducer likepost", state, action);
       const updatedContent = state.content.map(item => {
         if (item._id === action.singlePostContent[0]._id) {
           item.likes = action.singlePostContent[0].likes;
@@ -32,7 +30,6 @@ const allpostReducer = (state = initialState, action) => {
         singlePostContent: action.singlePostContent
       };
     case "all_post":
-      //console.log("allpost reducer", action);
       if (action.skipcount > 0) {
         return {
           ...state,
@@ -43,7 +40,6 @@ const allpostReducer = (state = initialState, action) => {
           hasMoreItems: action.hasMoreItems
         };
       } else {
-        //console.log("all post reducer content");
         const itemsCount =
           action.content.length > 0
             ? action.skipcount + state.postsperpage
@@ -59,7 +55,6 @@ const allpostReducer = (state = initialState, action) => {
       }
 
     default:
-      //console.log(">>>>>default>>>>>");
       return state;
   }
 };

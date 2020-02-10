@@ -1,7 +1,7 @@
 const initialState = {
   commentsData: [],
   commentsSkipCount: 0,
-  commentsLimitCount: 4
+  commentsLimitCount: 5
 };
 
 const commentsReducer = (state = initialState, action) => {

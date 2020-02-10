@@ -3,7 +3,6 @@ const initialState = {
 };
 
 const categoriesReducer = (state = initialState, action) => {
-  //console.log("comments reducer", action);
   switch (action.type) {
     case "categories":
       return {

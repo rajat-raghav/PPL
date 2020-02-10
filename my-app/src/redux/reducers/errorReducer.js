@@ -4,6 +4,7 @@ const initialstate = {
 };
 
 const errorReduser = (state = initialstate, action) => {
+  //console.log("error reduser")
   switch (action.type) {
     case "error":
       return {

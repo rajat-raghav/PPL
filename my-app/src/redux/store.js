@@ -1,6 +1,6 @@
 import { createStore, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-//import thunk from "redux-thunk";
+
 import allpostReducer from "./reducers/allpostReducer";
 import commentsReducer from "./reducers/commentsReducer";
 import categoriesReducer from "./reducers/categoriesReducer";

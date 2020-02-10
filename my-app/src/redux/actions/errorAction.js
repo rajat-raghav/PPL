@@ -1,5 +1,5 @@
 export const error = (hasError, errorMsg) => {
-  //console.log("Error action", hasError);
+  //console.log("Error Action", hasError);
   return {
     type: "error",
     hasError: hasError,

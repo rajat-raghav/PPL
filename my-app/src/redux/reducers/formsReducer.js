@@ -4,6 +4,7 @@ const initialState = {
 };
 
 const formsReducer = (state = initialState, action) => {
+  //console.log("form reduser")
   switch (action.type) {
     case "postUploadForm":
       return {
