@@ -1,4 +1,10 @@
 {
-    "editor.formatOnSave": true,
-    "git.ignoreLimitWarning": true
+  "editor.formatOnSave": true,
+  "git.ignoreLimitWarning": true,
+  "eslint.format.enable": true,
+"eslint.autoFixOnSave": true,
+"editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+},
+"eslint.enable": true
 }

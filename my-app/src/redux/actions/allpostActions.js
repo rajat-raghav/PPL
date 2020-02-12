@@ -6,7 +6,7 @@ export const all_post = (
   hasMoreItems
 ) => {
   return {
-    type: "all_post",
+    type: 'all_post',
     skipcount: skipcount,
     content: content,
     category: category,
@@ -17,7 +17,7 @@ export const all_post = (
 
 export const single_post = singlePostContent => {
   return {
-    type: "single_post",
+    type: 'single_post',
     singlePostContent: singlePostContent
   };
 };
@@ -25,7 +25,7 @@ export const single_post = singlePostContent => {
 export const like_post = singlePostContent => {
   //console.log("****like post action", singlePostContent);
   return {
-    type: "like_post",
+    type: 'like_post',
     singlePostContent: singlePostContent
   };
 };

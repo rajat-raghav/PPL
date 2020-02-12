@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Footer = () => {
   return (
@@ -9,7 +9,7 @@ const Footer = () => {
             Copyright © Pet-Socail 2019 All Rights Reserved
           </div>
           <div className="footer_div2">
-            <a href=" ">Privacy Policy </a>|{" "}
+            <a href=" ">Privacy Policy </a>|{' '}
             <a href=" "> Terms &amp; Conditions</a>
           </div>
         </div>

@@ -1,14 +1,14 @@
-import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import Profile from "./profile";
-import Pagination from "./Pagination";
+import Profile from './profile';
+import Pagination from './Pagination';
 
 const ContentLeft = props => {
   const { allPosts, category, loadMore, likepost } = props;
   return (
-    <div key={""} className="content_lft">
+    <div key={''} className="content_lft">
       <Profile allPosts={allPosts} category={category} />
       <Pagination loadMore={loadMore} likepost={likepost} />
     </div>

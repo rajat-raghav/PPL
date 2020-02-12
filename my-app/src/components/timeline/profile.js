@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Profile = props => {
   const { allPosts } = props;
@@ -36,7 +36,7 @@ const Profile = props => {
                 <li>
                   <div className="div_name1">Name :</div>
                   <div className="div_name2">
-                    {localStorage.getItem("name")}
+                    {localStorage.getItem('name')}
                   </div>
                 </li>
                 {/* <li>
@@ -62,13 +62,13 @@ const Profile = props => {
                 id="timeline"
                 className="active"
                 onClick={() => {
-                  document.getElementById("timeline").className = "active";
-                  document.getElementById("myuploads").className = "";
-                  allPosts(0, "", "", true);
+                  document.getElementById('timeline').className = 'active';
+                  document.getElementById('myuploads').className = '';
+                  allPosts(0, '', '', true);
                 }}
                 href="#"
               >
-                Timeline{" "}
+                Homepage{' '}
               </a>
             </li>
             <li>
@@ -84,13 +84,13 @@ const Profile = props => {
               <a
                 id="myuploads"
                 onClick={() => {
-                  document.getElementById("myuploads").className = "active";
-                  document.getElementById("timeline").className = "";
-                  allPosts(0, "", localStorage.getItem("userID"), true);
+                  document.getElementById('myuploads').className = 'active';
+                  document.getElementById('timeline').className = '';
+                  allPosts(0, '', localStorage.getItem('userID'), true);
                 }}
                 href="#"
               >
-                My Uploads{" "}
+                My Uploads{' '}
               </a>
             </li>
           </ul>

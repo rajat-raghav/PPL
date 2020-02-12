@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const HeaderLeft = () => {
   return (
@@ -12,7 +12,7 @@ const HeaderLeft = () => {
       <div className="navigatn">
         <ul>
           <li>
-            <Link to={"/Timeline"}>Home</Link>
+            <Link to={'/Homepage'}>Home</Link>
           </li>
           <li>
             <a href=" "> E-Coupons </a>

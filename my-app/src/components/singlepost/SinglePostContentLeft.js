@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import Posts from "../helpers/Posts";
-import Comments from "./comments";
+import Posts from '../helpers/Posts';
+import Comments from './comments';
 
 const SinglePostContentLeft = props => {
   const { singlePostData, likepost, addComment, previousComments } = props;
@@ -11,7 +11,7 @@ const SinglePostContentLeft = props => {
       {/* <Posts content={this.props.singlePostData} /> */}
       {singlePostData
         ? singlePostData.map((data, i) => (
-            <Posts data={data} likepost={likepost} key={"key" + i} />
+            <Posts data={data} likepost={likepost} key={'key' + i} />
           ))
         : null}
 

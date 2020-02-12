@@ -1,21 +1,21 @@
-import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { Helmet } from "react-helmet";
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 
-import { ROUTES } from "../helpers/Config";
-import store from "../../redux/store";
-import { single_post, like_post } from "../../redux/actions/allpostActions";
-import { comments } from "../../redux/actions/commentsAction";
-import { error } from "../../redux/actions/errorAction";
-import ContentRight from "../helpers/ContentRight";
-import SinglePostContentLeft from "../singlepost/SinglePostContentLeft";
-import getData from "../helpers/getData";
+import { ROUTES } from '../helpers/Config';
+import store from '../../redux/store';
+import { single_post, like_post } from '../../redux/actions/allpostActions';
+import { comments } from '../../redux/actions/commentsAction';
+import { error } from '../../redux/actions/errorAction';
+import ContentRight from '../helpers/ContentRight';
+import SinglePostContentLeft from '../singlepost/SinglePostContentLeft';
+import getData from '../helpers/getData';
 
 class Single_post extends React.Component {
   addComment = event => {
     event.preventDefault();
-    const id = localStorage.getItem("userID");
+    const id = localStorage.getItem('userID');
     //console.log("userid----", id);
 
     const data = {
@@ -37,7 +37,7 @@ class Single_post extends React.Component {
     window.scrollTo(500, 500);
   };
 
-  postData = e => {
+  postData = () => {
     //console.log("postData");
     const id = this.props.match.params;
     //console.log('id',id)
@@ -45,8 +45,14 @@ class Single_post extends React.Component {
     //   .post(SERVER.SERVER_URL + SERVER.ROUTES.SINGLE_POST, id)
     getData(ROUTES.SINGLE_POST, id)
       .then(response => {
+        //console.log(">>>>>>>>>>>>>>>>>>>>>>", response.data);
+        if (localStorage.getItem('userID') === null) {
+          if (response.data.length === 0) {
+            this.props.history.push('/Homepage');
+          }
+        }
         //console.log("response-data-------", response);
-        const singlePostData = response.data.result;
+        const singlePostData = response.data;
         //console.log("-singlepostdata-------", singlePostData);
         //this.setState({ singlePostData: response.data.result });
         store.dispatch(single_post(singlePostData));
@@ -85,7 +91,7 @@ class Single_post extends React.Component {
   likepost = id => {
     const data = {
       postid: id,
-      userid: localStorage.getItem("userID")
+      userid: localStorage.getItem('userID')
     };
     //console.log("likepost()---", data);
     // axios
@@ -105,9 +111,8 @@ class Single_post extends React.Component {
   }
 
   componentDidMount() {
-    //console.log("----------component Did mount-----------");
-    if (this.props.history.action === "POP") {
-      this.props.history.push("/Timeline");
+    if (!localStorage.getItem('userID')) {
+      this.props.history.push('/Login');
     }
     this.postData();
     this.previousComments(0);
@@ -119,7 +124,7 @@ class Single_post extends React.Component {
     if (this.props.hasError) {
       return (
         <div
-          style={{ padding: "16% 30%", color: "#f47b13", textAlign: "center" }}
+          style={{ padding: '16% 30%', color: '#f47b13', textAlign: 'center' }}
         >
           <h1>Something went wrong.</h1>
           <h2>Error:{this.props.errorMsg}</h2>
@@ -133,7 +138,7 @@ class Single_post extends React.Component {
         </Helmet>
         <div className="content">
           <ContentRight
-            allPosts={() => this.props.history.push("/Timeline")}
+            allPosts={() => this.props.history.push('/Timeline')}
             {...this.props}
           />
           <SinglePostContentLeft
@@ -164,7 +169,9 @@ Single_post.propTypes = {
   singlePostData: PropTypes.array,
   commentsLimitCount: PropTypes.number,
   hasError: PropTypes.bool,
-  errorMsg: PropTypes.string
+  errorMsg: PropTypes.string,
+  match: PropTypes.object,
+  history: PropTypes.object
 };
 
 export default connect(mapStateToProps)(Single_post);

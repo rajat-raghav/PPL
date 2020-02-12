@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const RightButton = props => {
   const { onButtonClick, buttonIcon, buttonText } = props;
@@ -7,11 +7,11 @@ const RightButton = props => {
     <div className="rght_btn" onClick={onButtonClick}>
       <span className="rght_btn_icon">
         <img src={buttonIcon} alt="up" />
-      </span>{" "}
+      </span>{' '}
       <span className="btn_sep">
         <img src="/images/btn_sep.png" alt="sep" />
-      </span>{" "}
-      <a>{buttonText}</a>{" "}
+      </span>{' '}
+      <a>{buttonText}</a>{' '}
     </div>
   );
 };

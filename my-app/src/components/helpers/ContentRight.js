@@ -1,10 +1,10 @@
-import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import RightContentButtons from "./RightContentButtons";
-import Categories from "../contentright/Categories";
-import Features from "../contentright/Features";
+import RightContentButtons from './RightContentButtons';
+import Categories from '../contentright/Categories';
+import Features from '../contentright/Features';
 
 const ContentRight = props => {
   // categoryUploadHandler = event => {
@@ -156,7 +156,10 @@ ContentRight.propTypes = {
   showPopup: PropTypes.bool,
   showCategoryForm: PropTypes.bool,
   allPosts: PropTypes.func,
-  categoryUploadHandler: PropTypes.func
+  categoryUploadHandler: PropTypes.func,
+  postUploadHandler: PropTypes.func,
+  categoryForm: PropTypes.func,
+  match: PropTypes.object
 };
 
 export default connect(mapStateToProps)(ContentRight);

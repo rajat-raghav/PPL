@@ -1,14 +1,14 @@
-var router = require("express").Router();
-var timelineSchema = require("./timelineSchema");
-var categorySchema = require("./categorySchema");
-var commentSchema = require("./commentSchema");
-var schema = require("./schema");
+let router = require("express").Router();
+let timelineSchema = require("./timelineSchema");
+let categorySchema = require("./categorySchema");
+let commentSchema = require("./commentSchema");
+let schema = require("./schema");
 
-//var bodyParser = require("body-parser");
-//var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var multer = require("multer");
+//let bodyParser = require("body-parser");
+//let urlencodedParser = bodyParser.urlencoded({ extended: false });
+let multer = require("multer");
 
-var storage = multer.diskStorage({
+let storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, "./Uploads");
   },
@@ -17,7 +17,7 @@ var storage = multer.diskStorage({
   }
 });
 
-var upload = multer({ storage: storage });
+let upload = multer({ storage: storage });
 
 router.post("/timeline", upload.single("selectedFiles"), function(req, res) {
   //console.log("File body", req.file);
@@ -136,14 +136,16 @@ router.post("/allPost", function(req, res) {
     .sort({ _id: -1 })
     .skip(skipcount)
     .limit(postsperpage)
-    .then(resul => {
-      if (resul) {
+    .then(result => {
+      if (result.length > 0) {
         //console.log("all post result", resul);
-        let addStatusInResult = {
-          result: resul,
-          status: "Profile Inserted"
-        };
-        res.send(addStatusInResult);
+        // let addStatusInResult = {
+        //   result: resul,
+        //   status: "Profile Inserted"
+        // };
+        res.send(result);
+      } else {
+        res.send(result);
       }
     });
 });
@@ -220,9 +222,12 @@ router.post("/singlepost", function(req, res) {
   timelineSchema.find({ _id: id }, function(err, result) {
     if (result) {
       //console.log('Welcome',result);
-      const a = { result: result, status: "Ok" };
+      // const a = { result: result};
 
-      res.send(a);
+      res.send(result);
+    } else {
+      // const a = { result: result};
+      res.send(result);
     }
   });
 });

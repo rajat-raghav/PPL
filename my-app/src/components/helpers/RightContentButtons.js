@@ -1,15 +1,15 @@
-import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import store from "../../redux/store";
-import PostUploadFormPopup from "../contentright/PostUploadFormPopup";
-import CategoryForm from "../contentright/CategoryForm";
-import RightButton from "../contentright/RightButton";
+import store from '../../redux/store';
+import PostUploadFormPopup from '../contentright/PostUploadFormPopup';
+import CategoryForm from '../contentright/CategoryForm';
+import RightButton from '../contentright/RightButton';
 import {
   postUploadForm,
   categoryUploadForm
-} from "../../redux/actions/formsAction";
+} from '../../redux/actions/formsAction';
 
 const RightContentButtons = props => {
   const {

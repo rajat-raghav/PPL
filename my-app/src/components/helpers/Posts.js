@@ -1,14 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import moment from "moment";
-import PropTypes from "prop-types";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+import PropTypes from 'prop-types';
 
 const Posts = props => {
   //console.log("inside post props",props);
   const { data, style, likepost } = props;
   return (
-    <div style={style} key={"key" + data._id} className="contnt_2">
-      <div key={"div_"} className="div_a">
+    <div style={style} key={'key' + data._id} className="contnt_2">
+      <div key={'div_'} className="div_a">
         <div className="div_title">{data.title}</div>
         <div className="btm_rgt">
           <div className="btm_arc">{data.category}</div>
@@ -20,20 +20,20 @@ const Posts = props => {
           </div>
           <div className="div_top_rgt">
             <span className="span_date">
-              {moment(data.time).format("MMM Do, YYYY")}
+              {moment(data.time).format('MMM Do, YYYY')}
             </span>
             <span className="span_time">
-              {moment(data.time).format("h:mm:ss A")}
+              {moment(data.time).format('h:mm:ss A')}
             </span>
           </div>
         </div>
         <div className="div_image">
-          <Link to={"/single_post/" + data._id}>
-            {" "}
+          <Link to={'/single_post/' + data._id}>
+            {' '}
             <img
-              src={"http://localhost:8089/" + data.selectedFiles}
+              src={'http://localhost:8089/' + data.selectedFiles}
               alt="pet"
-            />{" "}
+            />{' '}
           </Link>
         </div>
         <div className="div_btm">
@@ -68,7 +68,7 @@ const Posts = props => {
                 </a>
               </li>
               <li>
-                <Link to={"/single_post/" + data._id}>
+                <Link to={'/single_post/' + data._id}>
                   <span className="btn_icon">
                     <img src="/images/icon_004.png" alt="share" />
                   </span>

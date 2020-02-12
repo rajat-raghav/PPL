@@ -1,5 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 
 const RegisterForm = props => {
   //console.log("register props", props);
@@ -9,7 +11,7 @@ const RegisterForm = props => {
     password,
     first_name,
     last_name,
-    records,
+    status,
     signup,
     changestate
   } = props;
@@ -39,7 +41,7 @@ const RegisterForm = props => {
                 value={password}
                 onChange={changestate}
                 required
-              />{" "}
+              />{' '}
             </li>
             <li>
               <span>Email</span>
@@ -50,9 +52,9 @@ const RegisterForm = props => {
                 value={email}
                 onChange={changestate}
                 required
-              />{" "}
+              />{' '}
             </li>
-            {records === "Already Exists" ? <h3>Already Exists</h3> : null}
+            {status === 'Already Exists' ? <h3>Already Exists</h3> : null}
             <li>
               <span>First Name</span>
               <input
@@ -62,7 +64,7 @@ const RegisterForm = props => {
                 value={first_name}
                 onChange={changestate}
                 required
-              />{" "}
+              />{' '}
             </li>
             <li>
               <span>Last Name</span>
@@ -73,7 +75,7 @@ const RegisterForm = props => {
                 value={last_name}
                 onChange={changestate}
                 required
-              />{" "}
+              />{' '}
             </li>
             <li>
               <input type="checkbox" required />I agree to Term &amp; Conditions
@@ -90,5 +92,16 @@ const RegisterForm = props => {
       </div>
     </div>
   );
+};
+
+RegisterForm.propTypes = {
+  username: PropTypes.string,
+  password: PropTypes.string,
+  email: PropTypes.string,
+  first_name: PropTypes.string,
+  last_name: PropTypes.string,
+  status: PropTypes.string,
+  signup:PropTypes.func,
+  changestate:PropTypes.func
 };
 export default RegisterForm;

@@ -1,13 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import store from "../../redux/store";
-import { logoutUser } from "../../redux/actions/userActions";
+import store from '../../redux/store';
+import { logoutUser } from '../../redux/actions/userActions';
 
 class HeaderRight extends React.Component {
   logout = () => {
-    localStorage.removeItem("userID");
-    localStorage.removeItem("name");
+    localStorage.removeItem('userID');
+    localStorage.removeItem('name');
     store.dispatch(logoutUser());
   };
 

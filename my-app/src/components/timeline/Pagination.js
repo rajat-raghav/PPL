@@ -1,12 +1,13 @@
-import React, { createRef, Component, ref } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import InfiniteScroll from "react-infinite-scroller";
-import { FixedSizeList as List } from "react-window";
-import InfiniteLoader from "react-window-infinite-loader";
-import AutoSizer from "react-virtualized-auto-sizer";
+import React from 'react';
+//import { createRef, Component, ref } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import InfiniteScroll from 'react-infinite-scroller';
+//import { FixedSizeList as List } from 'react-window';
+//import InfiniteLoader from 'react-window-infinite-loader';
+//import AutoSizer from 'react-virtualized-auto-sizer';
 
-import Posts from "../helpers/Posts";
+import Posts from '../helpers/Posts';
 
 const Pagination = props => {
   const { content, likepost, hasMoreItems, loadMore } = props;
@@ -30,9 +31,9 @@ const Pagination = props => {
             src="images/loading3.gif"
             alt="loading"
             style={{
-              margin: "2% 25%",
-              height: "80px",
-              width: "50%"
+              margin: '2% 25%',
+              height: '80px',
+              width: '50%'
             }}
           ></img>
         </div>
@@ -40,7 +41,7 @@ const Pagination = props => {
     >
       {content
         ? content.map((data, i) => (
-            <Posts data={data} likepost={likepost} key={"key" + i} />
+            <Posts data={data} likepost={likepost} key={'key' + i} />
           ))
         : null}
     </InfiniteScroll>

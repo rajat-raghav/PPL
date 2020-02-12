@@ -1,17 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import store from "../../redux/store";
-import { postUploadForm } from "../../redux/actions/formsAction";
+import store from '../../redux/store';
+import { postUploadForm } from '../../redux/actions/formsAction';
 
-import "../../style.css";
+import '../../style.css';
 
 const PostUploadFormPopup = props => {
   const { showPopup, fileUpload, categories } = props;
   return (
     <div className="popup">
       <div className="popup\_inner">
-        <h4 style={{ textAlign: "center" }}>Upload Post</h4>
+        <h4 style={{ textAlign: 'center' }}>Upload Post</h4>
         <div className="topright">
           <a
             onClick={() => store.dispatch(postUploadForm(!showPopup))}

@@ -1,6 +1,6 @@
-import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 const Categories = props => {
   const { categoriesData, postsUserId, allPosts } = props;
@@ -14,10 +14,10 @@ const Categories = props => {
           {categoriesData?.map((data, index) => {
             return (
               <li
-                key={"key" + index}
+                key={'key' + index}
                 style={{
-                  margin: "2px",
-                  boxShadow: "2px 2px #888888"
+                  margin: '2px',
+                  boxShadow: '2px 2px #888888'
                 }}
               >
                 <a
@@ -29,7 +29,7 @@ const Categories = props => {
                 >
                   <span className="list_icon">
                     <img src="/images/category_icon3.png" alt="up" />
-                  </span>{" "}
+                  </span>{' '}
                   <span className="list_data">{data.category}</span>
                 </a>
               </li>
@@ -37,14 +37,14 @@ const Categories = props => {
           })}
           <li
             style={{
-              margin: "2px",
-              boxShadow: "2px 2px #888888"
+              margin: '2px',
+              boxShadow: '2px 2px #888888'
             }}
           >
             <a onClick={() => allPosts(0)} href="#">
               <span className="list_icon">
                 <img src="/images/category_icon3.png" alt="up" />
-              </span>{" "}
+              </span>{' '}
               <span className="list_data">All Posts</span>
             </a>
           </li>

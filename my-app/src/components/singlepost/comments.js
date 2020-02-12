@@ -1,6 +1,6 @@
-import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 const Comments = props => {
   const {
@@ -16,7 +16,7 @@ const Comments = props => {
         {commentsData
           ? commentsData?.map((data, index) => {
               return (
-                <li key={"key" + index}>
+                <li key={'key' + index}>
                   <div className="list_image">
                     <div className="image_sec">
                       <img src="/images/post_img.png" />
