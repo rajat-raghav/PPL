@@ -5,10 +5,9 @@ import { Helmet } from 'react-helmet';
 
 import ContentLeft from '../timeline/ContentLeft';
 import ContentRight from '../helpers/ContentRight';
-import getData from '../helpers/getData';
+import { getData , defaultCategory, likepost}  from '../helpers/getData';
 import { ROUTES } from '../helpers/Config';
-import { all_post, like_post } from '../../redux/actions/allpostActions';
-import { categories } from '../../redux/actions/categoriesAction';
+import { all_post } from '../../redux/actions/allpostActions';
 import { loginUser } from '../../redux/actions/userActions';
 import { error } from '../../redux/actions/errorAction';
 import store from '../../redux/store';
@@ -17,35 +16,11 @@ import {
   categoryUploadForm
 } from '../../redux/actions/formsAction';
 
+
 class Homepage extends React.Component {
-  allPosts = (
-    skipcount,
-    category = '',
-    postsUserID = '',
-    hasMoreItems = true
-  ) => {
-    const data = {
-      skipcount: skipcount,
-      category: category,
-      postsperpage: this.props.postsperpage,
-      postsUserID: postsUserID
-    };
-    // axios
-    //   .post(SERVER.SERVER_URL + SERVER.ROUTES.ALL_POST, data)
-    getData(ROUTES.ALL_POST, data)
-      .then(response => {
-        const content = response.data;
-        //console.log("all post content", content);
-        store.dispatch(
-          all_post(skipcount, content, category, postsUserID, hasMoreItems)
-        );
-      })
-      .catch(error => {
-        store.dispatch(error(true, error.message));
-      });
-  };
 
   loadMore = () => {
+    //console.log('********',this.props);
     const data = {
       category: this.props.category,
       postsUserID: this.props.postsUserID
@@ -78,25 +53,37 @@ class Homepage extends React.Component {
       .catch(err => {
         store.dispatch(error(true, err.message));
       });
-  };
-
-  likepost = id => {
+  }
+  
+  
+  allPosts = (
+    skipcount,
+    category = '',
+    postsUserID = '',
+    hasMoreItems = true
+  ) => {
+    //console.log('****-----****',this.props);
     const data = {
-      postid: id,
-      userid: localStorage.getItem('userID')
+      skipcount: skipcount,
+      category: category,
+      postsperpage: this.props.postsperpage,
+      postsUserID: postsUserID
     };
-    //console.log("likepost()---", data);
     // axios
-    //   .post(SERVER.SERVER_URL + SERVER.ROUTES.LIKE, data)
-    getData(ROUTES.LIKE, data)
+    //   .post(SERVER.SERVER_URL + SERVER.ROUTES.ALL_POST, data)
+    getData(ROUTES.ALL_POST, data)
       .then(response => {
-        const contentcopy = response.data.result;
-        store.dispatch(like_post(contentcopy));
+        const content = response.data;
+        //console.log("all post content", content);
+        store.dispatch(
+          all_post(skipcount, content, category, postsUserID, hasMoreItems)
+        );
       })
-      .catch(err => {
-        store.dispatch(error(true, err.message));
+      .catch(error => {
+        store.dispatch(error(true, error.message));
       });
-  };
+  }
+  
 
   static getDerivedStateFromError(error) {
     //return <h1>Something went wrong.</h1>;
@@ -108,9 +95,7 @@ class Homepage extends React.Component {
   categoryUploadHandler = event => {
     //console.log("cat upload()");
     event.preventDefault();
-    //console.log("newcate---", event.target.newcategory.value);
-    //let fd = new FormData();
-    //fd.append("category", this.state.newcategory);
+ 
     const data = {
       category_name: event.target.newcategory.value
     };
@@ -119,12 +104,7 @@ class Homepage extends React.Component {
     //   .post(SERVER.SERVER_URL + SERVER.ROUTES.CATEGORY_UPLOAD, data)
     getData(ROUTES.CATEGORY_UPLOAD, data)
       .then(() => {
-        //console.log("ressss-----------", response);
-        //const c_status = response.data.status;
-        //const categoriesData = response.data.result;
-        //store.dispatch(categories(categoriesData));
-        //this.setState({ categories });
-        //console.log("categories----", this.state.categories);
+
         store.dispatch(categoryUploadForm(!this.props.showCategoryForm));
         this.defaultCategory();
         //alert(c_status);
@@ -136,25 +116,7 @@ class Homepage extends React.Component {
       });
   };
 
-  defaultCategory = () => {
-    // axios
-    //   .post(SERVER.SERVER_URL + SERVER.ROUTES.DEFAULT_CATEGORY)
-    getData(ROUTES.DEFAULT_CATEGORY)
-      .then(response => {
-        //console.log("Default Category Response -----------", response);
-        //var c_status = response.data.status;
-        const categoriesData = response.data.result;
-        store.dispatch(categories(categoriesData));
-        //this.setState({ categories });
-        //console.log("categories----", this.state.categoryarr);
-        //alert(c_status);
-      })
-      .catch(err => {
-        store.dispatch(error(true, err.message));
-      });
-    //   this.setState({count:false})
-  };
-
+  
   postUploadHandler = event => {
     //console.log("postUploadHandler");
     const userid = localStorage.getItem('userID');
@@ -167,27 +129,9 @@ class Homepage extends React.Component {
     formdata.append('category', categoryname);
     formdata.append('userid', userid);
     formdata.append('title', event.target.title.value);
-    //formdata.append("username", event.target.username.value);
-    //formdata.append("likes", this.state.likes);
-    //console.log("imagename", event.target.selectedFiles.files[0]);
-    //console.log("fd", formdata);
-    // axios
-    //   .post(SERVER.SERVER_URL + SERVER.ROUTES.UPLOAD_POST, formdata)
     getData(ROUTES.UPLOAD_POST, formdata)
       .then(() => {
-        //console.log("ressss-----------", response);
-        //const status = response.data.status;
-        //const content = response.data.result;
-        //   const images = content.map((post) =>{
-        //   return post.selectedFiles;
-        // });
-        //content.reverse();
-
-        // const posttime = content.map
-
-        //this.setState({ content: [] });
-        //console.log("image content----", this.state.content);
-        //this.handleClick();
+   
         store.dispatch(postUploadForm(!this.props.showPopup));
 
         //alert(status);
@@ -205,7 +149,7 @@ class Homepage extends React.Component {
     if (!localStorage.getItem('userID')) {
       this.props.history.push('/Login');
     } else {
-      this.defaultCategory();
+      defaultCategory();
       store.dispatch(loginUser(localStorage.getItem('userID')));
     }
   }
@@ -242,14 +186,14 @@ class Homepage extends React.Component {
           <ContentLeft
             loadMore={this.loadMore}
             allPosts={this.allPosts}
-            likepost={this.likepost}
+            likepost={likepost}
           />
           <ContentRight
             history={this.props.history}
             allPosts={this.allPosts}
             categoryUploadHandler={this.categoryUploadHandler}
             postUploadHandler={this.postUploadHandler}
-            defaultCategory={this.defaultCategory}
+            defaultCategory={defaultCategory}
           />
         </div>
       </div>

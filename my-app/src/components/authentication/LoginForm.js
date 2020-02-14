@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -20,7 +21,7 @@ const LoginForm = props => {
               <span>Email-ID</span>
               <input
                 type="email"
-                style={emailStyle}
+                style={emailStyle?emailStyle:null}
                 name="email"
                 placeholder="Enter your email"
                 required
@@ -36,7 +37,7 @@ const LoginForm = props => {
               <input
                 type="password"
                 name="password"
-                style={passwordStyle}
+                style={passwordStyle?passwordStyle:null}
                 placeholder="Enter your password"
                 required
               />
@@ -66,10 +67,19 @@ const LoginForm = props => {
   );
 };
 
+const mapStateToProps = (state,ownProps) => {
+  return {
+    emailStyle:state.user.emailStyle,
+    passwordStyle:state.user.passwordStyle,
+    loginStatus:state.user.loginStatus,
+    login:ownProps.login
+  };
+};
+
 LoginForm.propTypes = {
   emailStyle: PropTypes.object,
   passwordStyle: PropTypes.object,
   loginStatus: PropTypes.string,
   login: PropTypes.func
 };
-export default LoginForm;
+export default connect(mapStateToProps)(LoginForm);

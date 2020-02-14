@@ -29,8 +29,11 @@
       "avoid-escape"
     ],
     "semi": [
-      0,
-      "never"
+      1,
+      "always"
+    ],
+    "no-undef": [
+      1
     ]
   }
 }

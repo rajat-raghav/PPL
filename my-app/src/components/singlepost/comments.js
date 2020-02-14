@@ -15,23 +15,23 @@ const Comments = props => {
       <ul>
         {commentsData
           ? commentsData?.map((data, index) => {
-              return (
-                <li key={'key' + index}>
-                  <div className="list_image">
-                    <div className="image_sec">
-                      <img src="/images/post_img.png" />
-                    </div>
-                    <div className="image_name">{data.username}</div>
+            return (
+              <li key={'key' + index}>
+                <div className="list_image">
+                  <div className="image_sec">
+                    <img src="/images/post_img.png" />
                   </div>
-                  <div className="list_info">{data.comment}</div>
-                  <input
-                    type="button"
-                    defaultValue="Reply"
-                    className="orng_btn"
-                  />
-                </li>
-              );
-            })
+                  <div className="image_name">{data.username}</div>
+                </div>
+                <div className="list_info">{data.comment}</div>
+                <input
+                  type="button"
+                  defaultValue="Reply"
+                  className="orng_btn"
+                />
+              </li>
+            );
+          })
           : null}
         <li>
           <form onSubmit={addComment}>
@@ -58,10 +58,10 @@ const Comments = props => {
           <a onClick={() => previousComments(commentsSkipCount)}>View more</a>
         </div>
       ) : (
-        <div className="view_div">
-          <p>No More Comments</p>
-        </div>
-      )}
+          <div className="view_div">
+            <p>No More Comments</p>
+          </div>
+        )}
     </div>
   );
 };

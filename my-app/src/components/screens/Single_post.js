@@ -5,12 +5,14 @@ import { Helmet } from 'react-helmet';
 
 import { ROUTES } from '../helpers/Config';
 import store from '../../redux/store';
-import { single_post, like_post } from '../../redux/actions/allpostActions';
+import { single_post } from '../../redux/actions/allpostActions';
 import { comments } from '../../redux/actions/commentsAction';
 import { error } from '../../redux/actions/errorAction';
 import ContentRight from '../helpers/ContentRight';
 import SinglePostContentLeft from '../singlepost/SinglePostContentLeft';
-import getData from '../helpers/getData';
+import {getData, defaultCategory, likepost } from '../helpers/getData';
+import { loginUser } from '../../redux/actions/userActions';
+
 
 class Single_post extends React.Component {
   addComment = event => {
@@ -88,24 +90,6 @@ class Single_post extends React.Component {
       });
   };
 
-  likepost = id => {
-    const data = {
-      postid: id,
-      userid: localStorage.getItem('userID')
-    };
-    //console.log("likepost()---", data);
-    // axios
-    //   .post(SERVER.SERVER_URL + SERVER.ROUTES.LIKE, data)
-    getData(ROUTES.LIKE, data)
-      .then(response => {
-        const contentcopy = response.data.result;
-        store.dispatch(like_post(contentcopy));
-      })
-      .catch(err => {
-        store.dispatch(error(true, err.message));
-      });
-  };
-
   componentWillUnmount() {
     //console.log("----------component will unmount-----------");
   }
@@ -116,6 +100,8 @@ class Single_post extends React.Component {
     }
     this.postData();
     this.previousComments(0);
+    defaultCategory();
+    store.dispatch(loginUser(localStorage.getItem('userID')));
     window.scrollTo(0, 0);
   }
 
@@ -145,7 +131,7 @@ class Single_post extends React.Component {
             addComment={this.addComment}
             previousComments={this.previousComments}
             singlePostData={singlePostData}
-            likepost={this.likepost}
+            likepost={likepost}
           />
         </div>
       </div>

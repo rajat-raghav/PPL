@@ -1,19 +1,26 @@
 const initialState = {
-  userID: ""
+  userID: '',
+  emailStyle:{},
+  passwordStyle:{},
+  loginStatus:''
 };
 
 const userReducer = (state = initialState, action) => {
   //console.log("user reduser")
   switch (action.type) {
-    case "loginUser":
+    case 'loginUser':
       return {
         ...state,
-        userID: action.userID
+        userID: action.userID,
+        emailStyle: action.emailStyle,
+        passwordStyle:action.passwordStyle,
+        loginStatus:action.loginStatus
+
       };
-    case "logoutUser":
+    case 'logoutUser':
       return {
         ...state,
-        userID: ""
+        userID: ''
       };
     default:
       return state;

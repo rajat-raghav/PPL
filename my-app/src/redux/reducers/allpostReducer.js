@@ -3,20 +3,20 @@ const initialState = {
   singlePostContent: [],
   items: 0,
   postsperpage: 6,
-  category: "",
-  postsUserID: "",
+  category: '',
+  postsUserID: '',
   hasMoreItems: true
 };
 
 const allpostReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "single_post":
+    case 'single_post':
       return {
         ...state,
         singlePostContent: action.singlePostContent
       };
 
-    case "like_post":
+    case 'like_post':{
       const updatedContent = state.content.map(item => {
         if (item._id === action.singlePostContent[0]._id) {
           item.likes = action.singlePostContent[0].likes;
@@ -29,7 +29,8 @@ const allpostReducer = (state = initialState, action) => {
         content: updatedContent,
         singlePostContent: action.singlePostContent
       };
-    case "all_post":
+    }
+    case 'all_post':
       if (action.skipcount > 0) {
         return {
           ...state,

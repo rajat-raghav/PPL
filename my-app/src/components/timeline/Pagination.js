@@ -41,8 +41,8 @@ const Pagination = props => {
     >
       {content
         ? content.map((data, i) => (
-            <Posts data={data} likepost={likepost} key={'key' + i} />
-          ))
+          <Posts data={data} likepost={likepost} key={'key' + i} />
+        ))
         : null}
     </InfiniteScroll>
     // <InfiniteLoader
