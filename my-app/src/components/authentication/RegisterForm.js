@@ -4,16 +4,9 @@ import PropTypes from 'prop-types';
 
 
 const RegisterForm = props => {
-  //console.log("register props", props);
   const {
-    username,
-    email,
-    password,
-    first_name,
-    last_name,
     status,
     signup,
-    changestate
   } = props;
   return (
     <div className="content_rgt">
@@ -27,8 +20,6 @@ const RegisterForm = props => {
                 type="text"
                 name="username"
                 placeholder="Enter your username"
-                value={username}
-                onChange={changestate}
                 required
               />
             </li>
@@ -38,8 +29,6 @@ const RegisterForm = props => {
                 type="password"
                 name="password"
                 placeholder="Enter your password"
-                value={password}
-                onChange={changestate}
                 required
               />{' '}
             </li>
@@ -49,8 +38,6 @@ const RegisterForm = props => {
                 type="email"
                 name="email"
                 placeholder="Enter your email"
-                value={email}
-                onChange={changestate}
                 required
               />{' '}
             </li>
@@ -61,8 +48,6 @@ const RegisterForm = props => {
                 type="text"
                 name="first_name"
                 placeholder="Enter your First Name"
-                value={first_name}
-                onChange={changestate}
                 required
               />{' '}
             </li>
@@ -72,8 +57,6 @@ const RegisterForm = props => {
                 type="text"
                 name="last_name"
                 placeholder="Enter your Last name"
-                value={last_name}
-                onChange={changestate}
                 required
               />{' '}
             </li>
@@ -95,13 +78,7 @@ const RegisterForm = props => {
 };
 
 RegisterForm.propTypes = {
-  username: PropTypes.string,
-  password: PropTypes.string,
-  email: PropTypes.string,
-  first_name: PropTypes.string,
-  last_name: PropTypes.string,
   status: PropTypes.string,
-  signup:PropTypes.func,
-  changestate:PropTypes.func
+  signup: PropTypes.func,
 };
 export default RegisterForm;

@@ -1,11 +1,12 @@
-export const loginUser = (userID, emailStyle={}, passwordStyle={},loginStatus) => {
-console.log('login action--', emailStyle);
+export const loginUser = (userID, name, emailStyle = {}, passwordStyle = {}, loginStatus) => {
+  //console.log('login action--', emailStyle);
   return {
     type: 'loginUser',
     userID: userID,
-    emailStyle:emailStyle,
-    passwordStyle:passwordStyle,
-    loginStatus:loginStatus
+    name: name,
+    emailStyle: emailStyle,
+    passwordStyle: passwordStyle,
+    loginStatus: loginStatus
   };
 };
 

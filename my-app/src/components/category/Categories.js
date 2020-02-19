@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import CategoryHeader from './categoryHeader';
+import allPosts from '../../helpers/allPosts'
+
 const Categories = props => {
-  const { categoriesData, postsUserId, allPosts } = props;
+  const { categoriesData, postsUserId, postsperpage } = props;
   return (
     <div className="rght_cate">
-      <div className="rght_cate_hd" id="rght_cat_bg">
-        Categories
-      </div>
+      <CategoryHeader />
       <div className="rght_list">
         <ul>
           {categoriesData?.map((data, index) => {
@@ -23,7 +24,7 @@ const Categories = props => {
                 <a
                   onClick={() => {
                     //console.log("postsuserid", postsUserId);
-                    props.allPosts(0, data.category, postsUserId);
+                    allPosts(0, postsperpage, data.category, postsUserId);
                   }}
                   href="#"
                 >
@@ -54,19 +55,19 @@ const Categories = props => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   //console.log("categories", state, ownProps);
   return {
     categoriesData: state.categories.categoriesData,
     postsUserId: state.posts.postsUserID,
-    allPosts: ownProps.allPosts
+    postsperpage: state.posts.postsperpage,
   };
 };
 
 Categories.propTypes = {
   categoriesData: PropTypes.array,
   postsUserId: PropTypes.string,
-  allPosts: PropTypes.func
+  postsperpage: PropTypes.number
 };
 
 export default connect(mapStateToProps)(Categories);

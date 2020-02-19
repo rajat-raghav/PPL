@@ -2,9 +2,8 @@
   "editor.formatOnSave": true,
   "git.ignoreLimitWarning": true,
   "eslint.format.enable": true,
-"eslint.autoFixOnSave": true,
-"editor.codeActionsOnSave": {
+  "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-},
-"eslint.enable": true
+  },
+  "eslint.enable": true
 }

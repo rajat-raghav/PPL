@@ -1,8 +1,9 @@
 const initialState = {
   userID: '',
-  emailStyle:{},
-  passwordStyle:{},
-  loginStatus:''
+  name: '',
+  emailStyle: {},
+  passwordStyle: {},
+  loginStatus: ''
 };
 
 const userReducer = (state = initialState, action) => {
@@ -12,16 +13,14 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         userID: action.userID,
+        name: action.name,
         emailStyle: action.emailStyle,
-        passwordStyle:action.passwordStyle,
-        loginStatus:action.loginStatus
+        passwordStyle: action.passwordStyle,
+        loginStatus: action.loginStatus
 
       };
     case 'logoutUser':
-      return {
-        ...state,
-        userID: ''
-      };
+      return initialState;
     default:
       return state;
   }

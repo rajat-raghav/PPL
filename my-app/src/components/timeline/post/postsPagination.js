@@ -1,16 +1,51 @@
 import React from 'react';
-//import { createRef, Component, ref } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
+//import { createRef, Component, ref } from 'react';
 //import { FixedSizeList as List } from 'react-window';
 //import InfiniteLoader from 'react-window-infinite-loader';
 //import AutoSizer from 'react-virtualized-auto-sizer';
 
-import Posts from '../helpers/Posts';
+import Post from './Post';
+import api from '../../../helpers/api';
+import { ROUTES } from '../../../Config'
+import store from '../../../redux/store'
+import { error } from '../../../redux/actions/errorAction'
+import allPosts from '../../../helpers/allPosts'
 
-const Pagination = props => {
-  const { content, likepost, hasMoreItems, loadMore } = props;
+const PostsPagination = props => {
+  const { content, hasMoreItems, category, postsUserID, items, postsperpage } = props;
+  const loadMore = () => {
+    const data = {
+      category: category,
+      postsUserID: postsUserID
+    };
+    api(ROUTES.POST_COUNT, data)
+      .then(res => {
+        const totalpost = res.data.result;
+        console.log('loadmore', items, totalpost);
+        if (items < totalpost) {
+          allPosts(
+            items,
+            postsperpage,
+            category,
+            postsUserID
+          );
+        } else if (items >= totalpost) {
+          allPosts(
+            items,
+            postsperpage,
+            category,
+            postsUserID,
+            false
+          );
+        }
+      })
+      .catch(err => {
+        store.dispatch(error(true, err.message));
+      });
+  }
 
   // const getPost = ({ index, style }) => {
   //   console.log("index", index);
@@ -41,7 +76,9 @@ const Pagination = props => {
     >
       {content
         ? content.map((data, i) => (
-          <Posts data={data} likepost={likepost} key={'key' + i} />
+          <div key={'key' + data._id} className="contnt_2">
+            <Post data={data} key={'key' + i} />
+          </div>
         ))
         : null}
     </InfiniteScroll>
@@ -73,20 +110,24 @@ const Pagination = props => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
+
+
+const mapStateToProps = (state) => {
   return {
     content: state.posts.content,
     hasMoreItems: state.posts.hasMoreItems,
-    loadMore: ownProps.loadMore,
-    likepost: ownProps.likepost
+    items: state.posts.items,
+    category: state.posts.category,
+    postsUserID: state.posts.postsUserID,
+    postsperpage: state.posts.postsperpage
+
   };
 };
 
-Pagination.propTypes = {
+PostsPagination.propTypes = {
   content: PropTypes.array,
   hasMoreItems: PropTypes.bool,
   loadMore: PropTypes.func,
-  likepost: PropTypes.func
 };
 
-export default connect(mapStateToProps)(Pagination);
+export default connect(mapStateToProps)(PostsPagination);

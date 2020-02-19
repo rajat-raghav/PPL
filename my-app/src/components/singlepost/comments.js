@@ -2,14 +2,46 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import api from '../../helpers/api';
+import { ROUTES } from '../../Config';
+import store from '../../redux/store';
+import { error } from '../../redux/actions/errorAction';
+import previousComments from '../../helpers/previousComments';
+import singlePost from '../../helpers/singlePost';
+
 const Comments = props => {
   const {
     commentsData,
     commentsCount,
     commentsSkipCount,
-    previousComments,
-    addComment
+    commentsLimitCount,
+    userID,
+    postID
   } = props;
+
+  const addComment = event => {
+    event.preventDefault();
+    const id = userID;
+    //console.log("userid----", id);
+    const data = {
+      cid: postID,
+      userid: id,
+      comment: event.target.comment.value
+    };
+    // axios
+    //   .post(SERVER.SERVER_URL + SERVER.ROUTES.COMMENT, data)
+    api(ROUTES.COMMENT, data)
+      .then(() => {
+        previousComments(postID, 0, commentsLimitCount);
+        singlePost(postID);
+      })
+      .catch(err => {
+        store.dispatch(error(true, err.message));
+      });
+    event.target.comment.value = null;
+    window.scrollTo(500, 500);
+  };
+
   return (
     <div className="contnt_3">
       <ul>
@@ -55,7 +87,9 @@ const Comments = props => {
       </ul>
       {commentsSkipCount < commentsCount ? (
         <div className="view_div">
-          <a onClick={() => previousComments(commentsSkipCount)}>View more</a>
+          <a onClick={() => previousComments(postID, commentsSkipCount, commentsLimitCount)}>
+            View more
+          </a>
         </div>
       ) : (
           <div className="view_div">
@@ -70,9 +104,11 @@ const mapStateToProps = (state, ownProps) => {
   return {
     commentsData: state.comments.commentsData,
     commentsSkipCount: state.comments.commentsSkipCount,
+    commentsLimitCount: state.comments.commentsLimitCount,
     commentsCount: state.posts.singlePostContent[0]?.commentsCount,
     addComment: ownProps.addComment,
-    previousComments: ownProps.previousComments
+    previousComments: ownProps.previousComments,
+    userID: state.user.userID
   };
 };
 

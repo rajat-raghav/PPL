@@ -13,7 +13,6 @@ const CategoryForm = props => {
     </div>
   );
 };
-
 CategoryForm.propTypes = {
   categoryUploadHandler: PropTypes.func
 };

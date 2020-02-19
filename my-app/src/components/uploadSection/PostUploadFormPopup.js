@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import store from '../../redux/store';
 import { postUploadForm } from '../../redux/actions/formsAction';
 
-import '../../popupStyle.css';
+import './popupStyle.css';
 
 const PostUploadFormPopup = props => {
   const { showPopup, fileUpload, categories } = props;

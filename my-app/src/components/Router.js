@@ -3,8 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 
 import Login from './authentication/Login';
 import Register from './authentication/Register';
-import Homepage from './screens/Homepage';
-import Single_post from './screens/Single_post';
+import Homepage from '../screens/Homepage';
+import Single_post from '../screens/Single_post';
 
 const Router = () => (
   <Switch>

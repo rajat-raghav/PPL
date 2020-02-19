@@ -5,15 +5,14 @@ import PropTypes from 'prop-types';
 import HeaderLeft from './HeaderLeft';
 import HeaderRight from './HeaderRight';
 
-class Header extends React.Component {
-  render() {
-    return (
-      <div className="header">
-        <HeaderLeft />
-        {this.props.userID ? <HeaderRight /> : null}
-      </div>
-    );
-  }
+const Header = (props) => {
+
+  return (
+    <div className="header">
+      <HeaderLeft />
+      {props.userID ? <HeaderRight /> : null}
+    </div>
+  );
 }
 const mapStateToProps = state => {
   return {
@@ -22,7 +21,7 @@ const mapStateToProps = state => {
 };
 
 Header.propTypes = {
-userID: PropTypes.string
+  userID: PropTypes.string
 };
 
 export default connect(mapStateToProps)(Header);
