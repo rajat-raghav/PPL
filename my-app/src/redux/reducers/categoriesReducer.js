@@ -4,7 +4,7 @@ const initialState = {
 
 const categoriesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "categories":
+    case 'categories':
       return {
         ...state,
         categoriesData: action.categoriesData

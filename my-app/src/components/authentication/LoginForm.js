@@ -12,8 +12,8 @@ const LoginForm = props => {
         {loginStatus === 'Logged in' ? (
           <h3 style={{ color: '#f47b13' }}>{loginStatus}</h3>
         ) : (
-          ''
-        )}
+            ''
+          )}
         <form onSubmit={login}>
           <h1>Log In</h1>
           <ul>
@@ -21,7 +21,7 @@ const LoginForm = props => {
               <span>Email-ID</span>
               <input
                 type="email"
-                style={emailStyle?emailStyle:null}
+                style={emailStyle ? emailStyle : null}
                 name="email"
                 placeholder="Enter your email"
                 required
@@ -30,14 +30,14 @@ const LoginForm = props => {
             {loginStatus === 'Invalid E-mail' ? (
               <h3 style={{ color: 'red' }}>{loginStatus}</h3>
             ) : (
-              ''
-            )}
+                ''
+              )}
             <li>
               <span>Password</span>
               <input
                 type="password"
                 name="password"
-                style={passwordStyle?passwordStyle:null}
+                style={passwordStyle ? passwordStyle : null}
                 placeholder="Enter your password"
                 required
               />
@@ -45,8 +45,8 @@ const LoginForm = props => {
             {loginStatus === 'Incorrect password' ? (
               <h3 style={{ color: 'red' }}>{loginStatus}</h3>
             ) : (
-              ''
-            )}
+                ''
+              )}
             <li>
               <input type="checkbox" />
               Remember Me
@@ -67,12 +67,12 @@ const LoginForm = props => {
   );
 };
 
-const mapStateToProps = (state,ownProps) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    emailStyle:state.user.emailStyle,
-    passwordStyle:state.user.passwordStyle,
-    loginStatus:state.user.loginStatus,
-    login:ownProps.login
+    emailStyle: state.user.emailStyle,
+    passwordStyle: state.user.passwordStyle,
+    loginStatus: state.user.loginStatus,
+    login: ownProps.login
   };
 };
 

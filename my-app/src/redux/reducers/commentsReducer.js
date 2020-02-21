@@ -7,7 +7,7 @@ const initialState = {
 const commentsReducer = (state = initialState, action) => {
   //console.log("comments reducer", action);
   switch (action.type) {
-    case "comments":
+    case 'comments':
       if (action.commentsSkipCount > 0) {
         return {
           ...state,

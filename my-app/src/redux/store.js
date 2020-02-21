@@ -1,6 +1,8 @@
-import { createStore, combineReducers } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga'
+//import { composeWithDevTools } from 'redux-devtools-extension';
 
+import mySaga from './saga'
 import allpostReducer from './reducers/allpostReducer';
 import commentsReducer from './reducers/commentsReducer';
 import categoriesReducer from './reducers/categoriesReducer';
@@ -17,6 +19,10 @@ const rootReducer = combineReducers({
   error: errorReduser
 });
 
-const store = createStore(rootReducer, composeWithDevTools());
+const sagaMiddleware = createSagaMiddleware()
+
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(mySaga)
 
 export default store;

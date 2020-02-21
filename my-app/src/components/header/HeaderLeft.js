@@ -1,5 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+
+import store from '../../redux/store';
+import { all_post } from '../../redux/actions/allpostActions';
 
 const HeaderLeft = () => {
   return (
@@ -11,7 +14,7 @@ const HeaderLeft = () => {
       </div>
       <div className="navigatn">
         <ul>
-          <li>
+          <li onClick={() => store.dispatch(all_post(0, [], '', '', true))}>
             <Link to={'/Homepage'}>Home</Link>
           </li>
           <li>

@@ -1,15 +1,15 @@
 export const postUploadForm = showPopup => {
   //console.log("postforms action--", showPopup);
   return {
-    type: "postUploadForm",
+    type: 'postUploadForm',
     showPopup: showPopup
   };
 };
 
 export const categoryUploadForm = showCategoryForm => {
-  console.log("categoryform action-----", showCategoryForm);
+  console.log('categoryform action-----', showCategoryForm);
   return {
-    type: "categoryUploadForm",
+    type: 'categoryUploadForm',
     showCategoryForm: showCategoryForm
   };
 };

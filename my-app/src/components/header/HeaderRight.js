@@ -54,6 +54,6 @@ const HeaderRight = () => {
       </div>
     </div>
   );
-}
+};
 
 export default HeaderRight;

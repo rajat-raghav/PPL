@@ -32,8 +32,11 @@ const Comments = props => {
     //   .post(SERVER.SERVER_URL + SERVER.ROUTES.COMMENT, data)
     api(ROUTES.COMMENT, data)
       .then(() => {
-        previousComments(postID, 0, commentsLimitCount);
-        singlePost(postID);
+        //previousComments(postID, 0, commentsLimitCount);
+        store.dispatch({ type: 'previousComments', id: postID, commentsSkipCount: 0, commentsLimitCount: commentsLimitCount })
+        //singlePost(postID);
+        store.dispatch({ type: 'singlePostData', id: postID })
+
       })
       .catch(err => {
         store.dispatch(error(true, err.message));
@@ -46,7 +49,7 @@ const Comments = props => {
     <div className="contnt_3">
       <ul>
         {commentsData
-          ? commentsData?.map((data, index) => {
+          ? commentsData.map((data, index) => {
             return (
               <li key={'key' + index}>
                 <div className="list_image">
@@ -87,7 +90,7 @@ const Comments = props => {
       </ul>
       {commentsSkipCount < commentsCount ? (
         <div className="view_div">
-          <a onClick={() => previousComments(postID, commentsSkipCount, commentsLimitCount)}>
+          <a onClick={() => store.dispatch({ type: 'previousComments', id: postID, commentsSkipCount: commentsSkipCount, commentsLimitCount: commentsLimitCount })}>
             View more
           </a>
         </div>

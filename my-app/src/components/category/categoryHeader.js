@@ -5,7 +5,7 @@ const CategoryHeader = () => {
         <div className="rght_cate_hd" id="rght_cat_bg">
             Categories
       </div>
-    )
-}
+    );
+};
 
 export default CategoryHeader;

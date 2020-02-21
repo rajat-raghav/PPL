@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 
 import { ROUTES } from '../../Config';
@@ -9,7 +9,7 @@ import RegisterForm from './RegisterForm';
 import ErrorMessage from '../../helpers/errormessage';
 import { error } from '../../redux/actions/errorAction';
 import store from '../../redux/store';
-import api from '../../helpers/api'
+import api from '../../helpers/api';
 
 
 function Register(props) {
@@ -24,7 +24,7 @@ function Register(props) {
     if (!props.userID) {
       props.history.push('/Login');
     }
-  })
+  });
 
   function signup(e) {
     e.preventDefault();
@@ -35,12 +35,12 @@ function Register(props) {
     setLast_name(e.target.last_name.value);
     const data = {
       username, password, email, first_name, last_name
-    }
+    };
 
     api(ROUTES.SIGN_UP, data)
       .then(response => {
         const status = response.data.status;
-        setStatus(status)
+        setStatus(status);
         if (status === 'Updated') {
           setTimeout(() => {
             props.history.push('/Login');
@@ -50,7 +50,7 @@ function Register(props) {
       .catch(err => {
         store.dispatch(error(true, err.message));
       });
-  };
+  }
 
   return (
     <div>
@@ -170,9 +170,9 @@ const mapStateToProps = state => {
 };
 
 Register.propTypes = {
-
   hasError: PropTypes.bool,
   errorMsg: PropTypes.string,
-  userID: PropTypes.string
+  userID: PropTypes.string,
+  history: PropTypes.object
 };
 export default connect(mapStateToProps)(Register);

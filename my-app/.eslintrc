@@ -1,4 +1,4 @@
-module.exports = {
+{
     "env": {
         "browser": true,
         "es6": true
@@ -22,7 +22,14 @@ module.exports = {
         "react"
     ],
     "rules": {
-        "semi": [1, "always"],
-        "quotes": [1, "single", "avoid-escape"]
+        "semi": [
+            1,
+            "always"
+        ],
+        "quotes": [
+            1,
+            "single",
+            "avoid-escape"
+        ]
     }
-};
+}

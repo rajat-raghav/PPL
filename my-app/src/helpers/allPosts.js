@@ -1,5 +1,3 @@
-import React from 'react'
-import { connect } from 'react-redux'
 import api from './api'
 import { ROUTES } from '../Config';
 import store from '../redux/store';

@@ -9,10 +9,10 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 import Post from './Post';
 import api from '../../../helpers/api';
-import { ROUTES } from '../../../Config'
-import store from '../../../redux/store'
-import { error } from '../../../redux/actions/errorAction'
-import allPosts from '../../../helpers/allPosts'
+import { ROUTES } from '../../../Config';
+import store from '../../../redux/store';
+import { error } from '../../../redux/actions/errorAction';
+import allPosts from '../../../helpers/allPosts';
 
 const PostsPagination = props => {
   const { content, hasMoreItems, category, postsUserID, items, postsperpage } = props;
@@ -26,32 +26,48 @@ const PostsPagination = props => {
         const totalpost = res.data.result;
         console.log('loadmore', items, totalpost);
         if (items < totalpost) {
-          allPosts(
-            items,
-            postsperpage,
-            category,
-            postsUserID
-          );
+          store.dispatch({
+            type: 'allPosts',
+            skipcount: items,
+            postsperpage: postsperpage,
+            category: category,
+            postsUserID: postsUserID,
+            hasMoreItems: true
+          })
+          // allPosts(
+          //   items,
+          //   postsperpage,
+          //   category,
+          //   postsUserID
+          // );
         } else if (items >= totalpost) {
-          allPosts(
-            items,
-            postsperpage,
-            category,
-            postsUserID,
-            false
-          );
+          store.dispatch({
+            type: 'allPosts',
+            skipcount: items,
+            postsperpage: postsperpage,
+            category: category,
+            postsUserID: postsUserID,
+            hasMoreItems: false
+          })
+          // allPosts(
+          //   items,
+          //   postsperpage,
+          //   category,
+          //   postsUserID,
+          //   false
+          // );
         }
       })
       .catch(err => {
         store.dispatch(error(true, err.message));
       });
-  }
+  };
 
   // const getPost = ({ index, style }) => {
   //   console.log("index", index);
   //   console.log("this.props.content", content);
   //   if (content[index]) {
-  //     return <Posts style={style} data={content[index]} likepost={likepost} />;
+  //     return <Posts style={style} data={content[index]} />;
   //   } else {
   //     return null;
   //   }
@@ -128,6 +144,10 @@ PostsPagination.propTypes = {
   content: PropTypes.array,
   hasMoreItems: PropTypes.bool,
   loadMore: PropTypes.func,
+  category: PropTypes.string,
+  postsUserID: PropTypes.string,
+  items: PropTypes.number,
+  postsperpage: PropTypes.number
 };
 
 export default connect(mapStateToProps)(PostsPagination);

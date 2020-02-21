@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const PostImage = props => {
   const { data } = props;
@@ -13,7 +14,11 @@ const PostImage = props => {
         />{' '}
       </Link>
     </div>
-  )
-}
+  );
+};
+
+PostImage.propTypes = {
+  data: PropTypes.object,
+};
 
 export default PostImage;

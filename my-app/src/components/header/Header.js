@@ -13,7 +13,7 @@ const Header = (props) => {
       {props.userID ? <HeaderRight /> : null}
     </div>
   );
-}
+};
 const mapStateToProps = state => {
   return {
     userID: state.user.userID

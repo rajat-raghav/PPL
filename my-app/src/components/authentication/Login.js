@@ -10,7 +10,7 @@ import LoginForm from './LoginForm';
 import { loginUser } from '../../redux/actions/userActions';
 import { error } from '../../redux/actions/errorAction';
 import store from '../../redux/store';
-import ErrorMessage from '../../helpers/errormessage'
+import ErrorMessage from '../../helpers/errormessage';
 
 function Login(props) {
 
@@ -18,7 +18,7 @@ function Login(props) {
     if (localStorage.getItem('userID') != null) {
       props.history.push('/Homepage');
     }
-  }, [])
+  });
 
   const login = e => {
     e.preventDefault();
@@ -164,7 +164,8 @@ function Login(props) {
 const mapStateToProps = state => {
   return {
     hasError: state.error.hasError,
-    errorMsg: state.error.errorMsg
+    errorMsg: state.error.errorMsg,
+    userID: state.user.userID
   };
 };
 
@@ -172,5 +173,6 @@ Login.propTypes = {
   history: PropTypes.object,
   hasError: PropTypes.bool,
   errorMsg: PropTypes.string,
+  userID: PropTypes.string
 };
 export default connect(mapStateToProps)(Login);

@@ -14,7 +14,7 @@ const ProfileCheckbox = () => {
           </li>
       </ul>
     </div>
-  )
-}
+  );
+};
 
 export default ProfileCheckbox;

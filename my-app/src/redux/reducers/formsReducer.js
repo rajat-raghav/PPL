@@ -6,12 +6,12 @@ const initialState = {
 const formsReducer = (state = initialState, action) => {
   //console.log("form reduser")
   switch (action.type) {
-    case "postUploadForm":
+    case 'postUploadForm':
       return {
         ...state,
         showPopup: action.showPopup
       };
-    case "categoryUploadForm":
+    case 'categoryUploadForm':
       return {
         ...state,
         showCategoryForm: action.showCategoryForm

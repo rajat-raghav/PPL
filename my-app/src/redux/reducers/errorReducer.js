@@ -1,12 +1,12 @@
 const initialstate = {
   hasError: false,
-  errorMsg: ""
+  errorMsg: ''
 };
 
 const errorReduser = (state = initialstate, action) => {
   //console.log("error reduser")
   switch (action.type) {
-    case "error":
+    case 'error':
       return {
         ...state,
         hasError: true,

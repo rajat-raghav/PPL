@@ -1,7 +1,9 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import likepost from '../../../helpers/likepost'
+import likepost from '../../../helpers/likepost';
+import store from '../../../redux/store';
 
 const PostButtons = props => {
 	const { data } = props;
@@ -28,7 +30,9 @@ const PostButtons = props => {
 					<li>
 						<a
 							onClick={() => {
-								likepost(data._id);
+								//likepost(data._id);
+								store.dispatch({ type: 'likePost', id: data._id })
+
 							}}
 						>
 							<span className="btn_icon">
@@ -48,7 +52,11 @@ const PostButtons = props => {
 				</ul>
 			</div>
 		</div>
-	)
-}
+	);
+};
+
+PostButtons.propTypes = {
+	data: PropTypes.object,
+};
 
 export default PostButtons;

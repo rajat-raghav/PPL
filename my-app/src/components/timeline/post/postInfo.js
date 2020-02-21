@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 const PostInfo = props => {
   const { data } = props;
@@ -19,6 +20,11 @@ const PostInfo = props => {
         </span>
       </div>
     </div>
-  )
-}
+  );
+};
+
+PostInfo.propTypes = {
+  data: PropTypes.object,
+};
+
 export default PostInfo;

@@ -7,11 +7,11 @@ import PostUploadFormPopup from './PostUploadFormPopup';
 import CategoryForm from './CategoryForm';
 import RightButton from './RightButton';
 import { postUploadForm, categoryUploadForm } from '../../redux/actions/formsAction';
-import api from '../../helpers/api'
-import { ROUTES } from '../../Config'
-import { error } from '../../redux/actions/errorAction'
-import defaultCategory from '../../helpers/defaultCategory'
-import allPosts from '../../helpers/allPosts'
+import api from '../../helpers/api';
+import { ROUTES } from '../../Config';
+import { error } from '../../redux/actions/errorAction';
+import defaultCategory from '../../helpers/defaultCategory';
+import allPosts from '../../helpers/allPosts';
 
 const UploadButtons = props => {
   const {
@@ -24,7 +24,7 @@ const UploadButtons = props => {
 
   const postUploadHandler = event => {
     //console.log("postUploadHandler");
-    const userid = userID
+    const userid = userID;
     event.preventDefault();
     let formdata = new FormData();
 
@@ -36,7 +36,12 @@ const UploadButtons = props => {
     api(ROUTES.UPLOAD_POST, formdata)
       .then(() => {
         store.dispatch(postUploadForm(!showPopup));
-        allPosts(0, postsperpage);
+        //allPosts(0, postsperpage);
+        store.dispatch({
+          type: 'allPosts',
+          skipcount: 0,
+          postsperpage: 6
+        })
       })
       .catch(err => {
         store.dispatch(error(true, err.message));
@@ -108,7 +113,9 @@ UploadButtons.propTypes = {
   categoriesData: PropTypes.array,
   categoryUploadHandler: PropTypes.func,
   logout: PropTypes.func,
-  categoryForm: PropTypes.func
+  categoryForm: PropTypes.func,
+  userID: PropTypes.string,
+  postsperpage: PropTypes.number
 };
 
 export default connect(mapStateToProps)(UploadButtons);

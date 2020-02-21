@@ -1,7 +1,7 @@
 export const error = (hasError, errorMsg) => {
   //console.log("Error Action", hasError);
   return {
-    type: "error",
+    type: 'error',
     hasError: hasError,
     errorMsg: errorMsg
   };

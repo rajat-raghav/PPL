@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const PostHeader = props => {
     const { data } = props;
@@ -9,6 +10,10 @@ const PostHeader = props => {
                 <div className="btm_arc">{data.category}</div>
             </div>
         </div>
-    )
-}
-export default PostHeader
+    );
+};
+
+PostHeader.propTypes = {
+    data: PropTypes.object,
+};
+export default PostHeader;

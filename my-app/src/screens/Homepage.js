@@ -11,21 +11,22 @@ import PostsPagination from '../components/timeline/post/postsPagination';
 import defaultCategory from '../helpers/defaultCategory';
 import ErrorMessage from '../helpers/errormessage';
 import store from '../redux/store';
-import { all_post } from '../redux/actions/allpostActions';
-
+import { all_post } from '../redux/actions/allpostActions'
 
 function Homepage(props) {
-  const { userID, hasError, errorMsg } = props
+  const { userID, hasError, errorMsg } = props;
   useEffect(() => {
     if (!userID) {
       props.history.push('/Login');
     } else {
-      defaultCategory();
+      //defaultCategory();
+      store.dispatch({ type: 'FetchCategories' });
+
     }
     return () => {
       store.dispatch(all_post(0, [], '', '', true));
-    }
-  }, [])
+    };
+  }, [userID]);
 
   return (
     <div className="container">
@@ -102,10 +103,10 @@ const mapStateToProps = state => {
 };
 
 Homepage.propTypes = {
-
   hasError: PropTypes.bool,
   errorMsg: PropTypes.string,
-  userID: PropTypes.string
+  userID: PropTypes.string,
+  history: PropTypes.object
 };
 
 export default connect(mapStateToProps)(Homepage);
