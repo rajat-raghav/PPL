@@ -4,4 +4,4 @@ var blogSchema = new Schema({
    category: String
 });
 
-module.exports = mongoose.model('category' , blogSchema);
+module.exports = mongoose.model('category', blogSchema);

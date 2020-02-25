@@ -1,4 +1,4 @@
-var mongoose = require("mongoose");
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var blogSchema = new Schema({
   title: String,
@@ -8,7 +8,8 @@ var blogSchema = new Schema({
   category: String,
   time: { type: Date, default: Date.now },
   likes: [],
+  likeStatus: { type: Boolean, default: true },
   commentsCount: { type: Number, default: 0 }
 });
 
-module.exports = mongoose.model("posts", blogSchema);
+module.exports = mongoose.model('posts', blogSchema);
