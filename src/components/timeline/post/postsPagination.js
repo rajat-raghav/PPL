@@ -14,8 +14,7 @@ import { ROUTES } from '../../../Config';
 import store from '../../../redux/store';
 import { error } from '../../../redux/actions/errorAction';
 import { fetchAllPosts } from '../../../redux/actions/sagaActions';
-//import Post from './Post';
-//import allPosts from '../../../helpers/allPosts';
+
 
 const Post = Loadable({
   loader: () => import('./Post'),

@@ -10,8 +10,8 @@ const PostUploadFormPopup = props => {
   const { showPopup, fileUpload, categories } = props;
   return (
     <div className="popup">
-      <div className="popup\_inner">
-        <h4 style={{ textAlign: 'center' }}>Upload Post</h4>
+      <div className="popup_inner">
+        <h4>Upload Post</h4>
         <div className="topright">
           <a
             onClick={() => store.dispatch(postUploadForm(!showPopup))}

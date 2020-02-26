@@ -169,7 +169,6 @@ const mapStateToProps = state => {
 };
 
 Login.propTypes = {
-  history: PropTypes.object,
   hasError: PropTypes.bool,
   errorMsg: PropTypes.string,
   userID: PropTypes.string

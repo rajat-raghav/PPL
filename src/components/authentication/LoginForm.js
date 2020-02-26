@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-
 const LoginForm = props => {
   const { emailStyle, passwordStyle, loginStatus, login } = props;
   return (

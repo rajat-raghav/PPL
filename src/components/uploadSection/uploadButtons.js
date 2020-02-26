@@ -10,10 +10,8 @@ import { postUploadForm, categoryUploadForm } from '../../redux/actions/formsAct
 import api from '../../helpers/api';
 import { ROUTES } from '../../Config';
 import { error } from '../../redux/actions/errorAction';
-import { fetchCategories } from '../../redux/actions/sagaActions';
-import { fetchAllPosts } from '../../redux/actions/sagaActions';
-//import defaultCategory from '../../helpers/defaultCategory';
-//import allPosts from '../../helpers/allPosts';
+import { fetchCategories, fetchAllPosts } from '../../redux/actions/sagaActions';
+
 
 const UploadButtons = props => {
   const {

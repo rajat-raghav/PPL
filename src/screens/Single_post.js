@@ -12,7 +12,7 @@ import Loading from '../helpers/loding';
 import { fetchCategories, fetchSinglePostData, fetchPreviousComments } from '../redux/actions/sagaActions';
 
 const Comments = Loadable({
-  loader: () => import('../components/singlepost/comments'),
+  loader: () => import('../components/commentsection/comments'),
   loading: Loading,
   delay: 500
 });

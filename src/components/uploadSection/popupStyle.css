@@ -27,14 +27,17 @@
   top: 8px;
   right: 16px;
 }
-.popup\_inner {
+.popup_inner {
   left: 25%;
   right: 25%;
   top: 25%;
   bottom: 25%;
   margin: auto;
   border-radius: 20px;
-  background: rgb(168, 167, 167);
+}
+
+.popup_inner h4 {
+  text-align: center
 }
 
 input[type="text"],

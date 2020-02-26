@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const CategoryForm = props => {
-  //console.log("category Form", this.props);\
   const { categoryUploadHandler } = props;
   return (
     <div>

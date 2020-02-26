@@ -34,7 +34,6 @@ const Homepage = (props) => {
     if (!userID) {
       history.push('/Login');
     } else {
-      //defaultCategory();
       store.dispatch(fetchCategories());
     }
     return () => {
